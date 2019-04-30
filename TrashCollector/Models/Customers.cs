@@ -32,6 +32,5 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
 
-
     }
 }
