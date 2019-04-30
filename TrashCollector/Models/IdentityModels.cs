@@ -23,6 +23,8 @@ namespace TrashCollector.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Customers> customers { get; set; }
+        public DbSet<Employees> employees { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
