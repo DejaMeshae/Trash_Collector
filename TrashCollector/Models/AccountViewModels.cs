@@ -68,9 +68,6 @@ namespace TrashCollector.Models
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }
 
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

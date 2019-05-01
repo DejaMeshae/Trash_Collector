@@ -42,7 +42,7 @@ namespace TrashCollector.Controllers
                 //    ApplicationDbContext context = new ApplicationDbContext(); 
                 //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context)); 
 
-                //var s=    UserManager.GetRoles(user.GetUserId()); 
+                //var s =    UserManager.GetRoles(user.GetUserId()); 
                 ViewBag.displayMenu = "No";
 
                 if (isAdminUser())

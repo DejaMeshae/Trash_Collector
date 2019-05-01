@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201905011329404_AddedUserRolesAndUSerNameToAccountViewModel.Designer.cs">
       <DependentUpon>201905011329404_AddedUserRolesAndUSerNameToAccountViewModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905011903152_UpdateDatabase.cs" />
+    <Compile Include="Migrations\201905011903152_UpdateDatabase.Designer.cs">
+      <DependentUpon>201905011903152_UpdateDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -316,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905011329404_AddedUserRolesAndUSerNameToAccountViewModel.resx">
       <DependentUpon>201905011329404_AddedUserRolesAndUSerNameToAccountViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905011903152_UpdateDatabase.resx">
+      <DependentUpon>201905011903152_UpdateDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
