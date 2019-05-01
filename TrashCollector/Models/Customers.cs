@@ -11,6 +11,7 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -31,6 +32,12 @@ namespace TrashCollector.Models
 
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+
+        [Display(Name = "Pick Up Date")]
+        public string PickUpdate { get; set; }
+
+        [Display(Name = "Stop Pick Up Date")]
+        public string StopPickUp { get; set; }
 
     }
 }
