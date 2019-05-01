@@ -78,11 +78,15 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp")] Customers customers)
         {
+            //find customer to edit
+            var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
+
+            customerToEdit.PickUpdate = customers.PickUpdate;
             if (ModelState.IsValid)
             {
-                db.Entry(customers).State = EntityState.Modified;
+                //db.Entry(customers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

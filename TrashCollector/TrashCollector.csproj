@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201904302000555_AddingEmployeesDatabase.Designer.cs">
       <DependentUpon>201904302000555_AddingEmployeesDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905010104272_AddedMoreRecordToCustomerTable.cs" />
+    <Compile Include="Migrations\201905010104272_AddedMoreRecordToCustomerTable.Designer.cs">
+      <DependentUpon>201905010104272_AddedMoreRecordToCustomerTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -300,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904302000555_AddingEmployeesDatabase.resx">
       <DependentUpon>201904302000555_AddingEmployeesDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905010104272_AddedMoreRecordToCustomerTable.resx">
+      <DependentUpon>201905010104272_AddedMoreRecordToCustomerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
