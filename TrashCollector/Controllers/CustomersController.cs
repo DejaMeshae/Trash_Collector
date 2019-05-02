@@ -25,20 +25,33 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //redirect to create so the customer can create sign up to recieve trash pick up
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Create");
+
             }
+            //var displayThatCustomerInfo = db.customers.Where(c => c.Id == id); dont think i need
             Customers customers = db.customers.Find(id);
             if (customers == null)
             {
+                //redirect to create so the customer can create sign up to recieve trash pick up
                 return HttpNotFound();
             }
-            return View(customers);
+            else
+            {
+                var displayThatCustomerInfo = db.customers.Where(c => c.Id == id);
+                return View("Details");
+
+            }
+            //return View(displayThatCustomerInfo); dont think i need
         }
 
         // GET: Customers/Create
         public ActionResult Create()
         {
-            return View();
+            //Create their account info address, start date
+            Customers customer = new Customers();
+            return View(customer);
         }
 
         // POST: Customers/Create
@@ -52,7 +65,7 @@ namespace TrashCollector.Controllers
             {
                 db.customers.Add(customers);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
 
             return View(customers);

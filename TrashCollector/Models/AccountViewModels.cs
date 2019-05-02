@@ -49,9 +49,9 @@ namespace TrashCollector.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "Email Address")]
         [EmailAddress]
-        public string UserName { get; set; }
+        public string EmailAddress { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
