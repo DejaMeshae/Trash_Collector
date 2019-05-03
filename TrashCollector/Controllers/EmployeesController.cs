@@ -139,7 +139,7 @@ namespace TrashCollector.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //hi
         protected override void Dispose(bool disposing)
         {
             if (disposing)
