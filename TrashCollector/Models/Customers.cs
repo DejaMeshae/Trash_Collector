@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -33,8 +34,10 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
 
+        //google a date picker
         [Display(Name = "Day of the week for pick up")]
         public string PickUpdate { get; set; }
+        
 
         [Display(Name = "Stop Pick Up Date")]
         public string StopPickUp { get; set; }
@@ -44,6 +47,10 @@ namespace TrashCollector.Models
 
         [Display(Name = "Temporarily stop pick up end date")]
         public string TempSuspendEnd { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserID { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }

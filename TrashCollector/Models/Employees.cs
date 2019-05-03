@@ -15,5 +15,7 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         public int ZipCode { get; set; }
 
+        public IEnumerable<Customers> Customers { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -25,25 +26,21 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                //redirect to create so the customer can create sign up to recieve trash pick up
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                return View("Create");
-
+                return View("Create"); 
             }
-            //var displayThatCustomerInfo = db.customers.Where(c => c.Id == id); dont think i need
-            Customers customers = db.customers.Find(id);
-            if (customers == null)
-            {
-                //redirect to create so the customer can create sign up to recieve trash pick up
-                return HttpNotFound();
-            }
+            //Customers customers = db.customers.Find(id);
+            //if (customers == null)
+            //{
+            //    //redirect to create so the customer can create sign up to recieve trash pick up
+            //    return HttpNotFound();
+            //}
             else
             {
-                var displayThatCustomerInfo = db.customers.Where(c => c.Id == id);
-                return View("Details");
-
+                //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault(); //dont think i need
+                string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+                var CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
+                return View(CurrentCustomerInfo); 
             }
-            //return View(displayThatCustomerInfo); dont think i need
         }
 
         // GET: Customers/Create
@@ -59,13 +56,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
         {
             if (ModelState.IsValid)
             {
+                // assign customer FK to aspnetuser!
+                customers.ApplicationUserID = User.Identity.GetUserId();
+                customers.Password = "password"; //might not need this line
                 db.customers.Add(customers);
                 db.SaveChanges();
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = customers.Id });
             }
 
             return View(customers);
@@ -76,7 +76,8 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //if its returning me here then the id is null
+                return View("Create");
             }
             Customers customers = db.customers.Find(id);
             if (customers == null)
@@ -91,7 +92,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
         {
             //find customer to edit and edit pick up date
             var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
@@ -99,6 +100,7 @@ namespace TrashCollector.Controllers
             customerToEdit.PickUpdate = customers.PickUpdate;
             if (ModelState.IsValid)
             {
+                customers.ApplicationUserID = User.Identity.GetUserId();
                 db.Entry(customers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

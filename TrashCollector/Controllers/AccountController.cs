@@ -168,7 +168,9 @@ namespace TrashCollector.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here
-                    return RedirectToAction("Details", "Customers");
+
+                    //if statements for employee and customer
+                    return RedirectToAction("Create", "Customers"); //need. at first i had it set to details, customers the details would check if a customer if not create
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
                 AddErrors(result);

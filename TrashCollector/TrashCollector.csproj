@@ -220,6 +220,18 @@
     <Compile Include="Migrations\201905021417478_AddedPropertiesToCustomerModel.Designer.cs">
       <DependentUpon>201905021417478_AddedPropertiesToCustomerModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905021751273_ApplicationUser.cs" />
+    <Compile Include="Migrations\201905021751273_ApplicationUser.Designer.cs">
+      <DependentUpon>201905021751273_ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905022057224_RemovedForeignKey.cs" />
+    <Compile Include="Migrations\201905022057224_RemovedForeignKey.Designer.cs">
+      <DependentUpon>201905022057224_RemovedForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905031922382_AddedIEnumerableCustomers.cs" />
+    <Compile Include="Migrations\201905031922382_AddedIEnumerableCustomers.Designer.cs">
+      <DependentUpon>201905031922382_AddedIEnumerableCustomers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -293,10 +305,10 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Employees\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -332,6 +344,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905021417478_AddedPropertiesToCustomerModel.resx">
       <DependentUpon>201905021417478_AddedPropertiesToCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021751273_ApplicationUser.resx">
+      <DependentUpon>201905021751273_ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905022057224_RemovedForeignKey.resx">
+      <DependentUpon>201905022057224_RemovedForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031922382_AddedIEnumerableCustomers.resx">
+      <DependentUpon>201905031922382_AddedIEnumerableCustomers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

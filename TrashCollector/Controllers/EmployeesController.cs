@@ -1,91 +1,153 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class EmployeesController : Controller
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
+                private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Employees
+        // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            string CurrentUserId = User.Identity.GetUserId();
+            //var customersSameZip = db.employees.Include(e => e.FK.ToList(); FK for foriegn key once i figure that out
+            var CustomersSameZip = db.employees.Include(e => e.Customers).ToList(); //FK for foriegn key once i figure that out
+            return View(CustomersSameZip);                                                                      //
+            //return View(db.customers.ToList());
         }
 
-        // GET: Employees/Details/5
-        public ActionResult Details(int id)
+        // GET: Customers/Details/5
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                Customers customers = null;
+                //redirect to create so the customer can create sign up to recieve trash pick up
+                string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+                //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
+                return View(customers); //show the customers info then they can click to edit
+            }
+            //var displayThatCustomerInfo = db.customers.Where(c => c.Id == id); dont think i need
+            //Customers customers = db.customers.Find(id);
+            //if (customers == null)
+            //{
+            //    //redirect to create so the customer can create sign up to recieve trash pick up
+            //    return HttpNotFound();
+            //}
+            //else
+            //{
+
+            return View(); //show the customers info then they can click to edit
+
+            //}
+            //return View(displayThatCustomerInfo); dont think i need
         }
 
-        // GET: Employees/Create
+        // GET: Customers/Create
         public ActionResult Create()
         {
-            return View();
+            //Create their account info address, start date
+            Customers customer = new Customers();
+            return View(customer);
         }
 
-        // POST: Employees/Create
+        // POST: Customers/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                // assign customer FK to aspnetuser!
+                customers.ApplicationUserID = User.Identity.GetUserId();
+                customers.Password = "password"; //might not need this line
+                db.customers.Add(customers);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = customers.Id });
+            }
 
+            return View(customers);
+        }
+
+        // GET: Customers/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customers customers = db.customers.Find(id);
+            if (customers == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customers);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
+        {
+            //find customer to edit and edit pick up date
+            var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
+
+            customerToEdit.PickUpdate = customers.PickUpdate;
+            if (ModelState.IsValid)
+            {
+                db.Entry(customers).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(customers);
         }
 
-        // GET: Employees/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Customers/Delete/5
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customers customers = db.customers.Find(id);
+            if (customers == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customers);
         }
 
-        // POST: Employees/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        // POST: Customers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Customers customers = db.customers.Find(id);
+            db.customers.Remove(customers);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // GET: Employees/Delete/5
-        public ActionResult Delete(int id)
+        protected override void Dispose(bool disposing)
         {
-            return View();
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
-        // POST: Employees/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
