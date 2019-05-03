@@ -50,7 +50,7 @@ namespace TrashCollector.Models
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserID { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
     }
 }

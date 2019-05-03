@@ -18,7 +18,10 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View(db.customers.ToList());
+            string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+            Customers CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
+            return RedirectToAction("Details", new { id = CurrentCustomerInfo.Id });
+            //return View(db.customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -36,10 +39,9 @@ namespace TrashCollector.Controllers
             //}
             else
             {
-                //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault(); //dont think i need
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
-                var CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
-                return View(CurrentCustomerInfo); 
+                Customers customer = db.customers.Find(id);
+                return View(customer); 
             }
         }
 
