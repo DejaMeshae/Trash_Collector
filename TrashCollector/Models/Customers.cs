@@ -35,7 +35,7 @@ namespace TrashCollector.Models
         public int ZipCode { get; set; }
 
         [Display(Name = "Start Pick-Up Services Date")]
-        public string StartPickUp { get; set; }
+        public DateTime StartPickUp { get; set; }
 
         //google a date picker
         [Display(Name = "Day Of The Week For Pick Up")]
@@ -50,7 +50,7 @@ namespace TrashCollector.Models
         [Display(Name = "Temporarily Stop Services End date")]
         public string TempSuspendEnd { get; set; }
 
-        [Display(Name = "Payment Due")]
+        [Display(Name = "Payment Due: $80")]
         public string BillAmount { get; set; }
 
         [ForeignKey("ApplicationUser")]

@@ -30,11 +30,6 @@ namespace TrashCollector.Controllers
             {
                 return View("Create"); 
             }
-            //if (customers == null)
-            //{
-            //    //redirect to create so the customer can create sign up to recieve trash pick up
-            //    return HttpNotFound();
-            //}
             else
             {
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
@@ -62,7 +57,6 @@ namespace TrashCollector.Controllers
             {
                 // assign customer FK to aspnetuser!
                 customers.ApplicationUserID = User.Identity.GetUserId();
-                //customers.Password = "password"; //might not need this line
                 db.customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = customers.Id });
@@ -105,8 +99,10 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index", new { id = customers.Id });
+            return RedirectToAction("Details", new { id = customers.Id });
         }
+
+
 
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
