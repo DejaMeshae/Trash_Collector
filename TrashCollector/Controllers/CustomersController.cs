@@ -21,7 +21,6 @@ namespace TrashCollector.Controllers
             string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
             Customers CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
             return RedirectToAction("Details", new { id = CurrentCustomerInfo.Id });
-            //return View(db.customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -31,7 +30,6 @@ namespace TrashCollector.Controllers
             {
                 return View("Create"); 
             }
-            //Customers customers = db.customers.Find(id);
             //if (customers == null)
             //{
             //    //redirect to create so the customer can create sign up to recieve trash pick up
@@ -58,13 +56,13 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,City,State,ZipCode,StartPickUp,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
         {
             if (ModelState.IsValid)
             {
                 // assign customer FK to aspnetuser!
                 customers.ApplicationUserID = User.Identity.GetUserId();
-                customers.Password = "password"; //might not need this line
+                //customers.Password = "password"; //might not need this line
                 db.customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = customers.Id });
@@ -94,7 +92,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,Email,Password,City,State,ZipCode,StartPickUp,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
         {
             //find customer to edit and edit pick up date
             var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
@@ -105,9 +103,9 @@ namespace TrashCollector.Controllers
                 customers.ApplicationUserID = User.Identity.GetUserId();
                 db.Entry(customers).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(customers);
+
+            return RedirectToAction("Index", new { id = customers.Id });
         }
 
         // GET: Customers/Delete/5

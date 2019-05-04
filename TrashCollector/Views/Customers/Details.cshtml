@@ -91,6 +91,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.TempSuspendStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempSuspendStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempSuspendEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempSuspendEnd)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.BillAmount)
         </dt>
 
@@ -106,5 +122,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id }) |
-    @*@Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Back to List", "Index")
 </p>
