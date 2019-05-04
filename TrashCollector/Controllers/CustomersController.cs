@@ -91,14 +91,16 @@ namespace TrashCollector.Controllers
             //find customer to edit and edit pick up date
             var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
 
+            customerToEdit.ZipCode = customers.ZipCode;
+            customerToEdit.StopPickUp = customers.StopPickUp;
+            customerToEdit.StartPickUp = customers.StartPickUp;
             customerToEdit.PickUpdate = customers.PickUpdate;
-            if (ModelState.IsValid)
-            {
-                customers.ApplicationUserID = User.Identity.GetUserId();
-                db.Entry(customers).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-
+            customerToEdit.TempSuspendStart = customers.TempSuspendStart;
+            customerToEdit.TempSuspendEnd = customers.TempSuspendEnd;
+            customers.ApplicationUserID = User.Identity.GetUserId();
+            //db.Entry(customers).State = EntityState.Modified;
+            db.SaveChanges();
+            
             return RedirectToAction("Details", new { id = customers.Id });
         }
 
