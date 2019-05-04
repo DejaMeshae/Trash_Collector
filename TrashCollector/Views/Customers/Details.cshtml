@@ -67,6 +67,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.StartPickUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartPickUp)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PickUpdate)
         </dt>
 
@@ -98,5 +106,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
 </p>

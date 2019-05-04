@@ -34,18 +34,20 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
 
-        //google a date picker
-        [Display(Name = "Day of the week for pick up")]
-        public string PickUpdate { get; set; }
-        
+        [Display(Name = "Start Pick-Up Services Date")]
+        public string StartPickUp { get; set; }
 
-        [Display(Name = "Stop Pick Up Date")]
+        //google a date picker
+        [Display(Name = "Day Of The Week For Pick Up")]
+        public string PickUpdate { get; set; }
+
+        [Display(Name = "End Pick-Up Services Date")]
         public string StopPickUp { get; set; }
 
-        [Display(Name = "Temporarily stop pick up start date")]
+        [Display(Name = "Temporarily Stop Services Start Date")]
         public string TempSuspendStart { get; set; }
 
-        [Display(Name = "Temporarily stop pick up end date")]
+        [Display(Name = "Temporarily Stop Services End date")]
         public string TempSuspendEnd { get; set; }
 
         [Display(Name = "Payment Due")]
