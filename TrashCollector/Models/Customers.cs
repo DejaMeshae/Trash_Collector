@@ -37,18 +37,17 @@ namespace TrashCollector.Models
         [Display(Name = "Start Pick-Up Services Date")]
         public DateTime StartPickUp { get; set; }
 
-        //google a date picker
         [Display(Name = "Day Of The Week For Pick Up")]
         public string PickUpdate { get; set; }
 
         [Display(Name = "End Pick-Up Services Date")]
-        public string StopPickUp { get; set; }
+        public DateTime StopPickUp { get; set; }
 
         [Display(Name = "Temporarily Stop Services Start Date")]
-        public string TempSuspendStart { get; set; }
+        public DateTime TempSuspendStart { get; set; }
 
         [Display(Name = "Temporarily Stop Services End date")]
-        public string TempSuspendEnd { get; set; }
+        public DateTime TempSuspendEnd { get; set; }
 
         [Display(Name = "Payment Due: $80")]
         public string BillAmount { get; set; }

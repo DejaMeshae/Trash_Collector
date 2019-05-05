@@ -248,6 +248,18 @@
     <Compile Include="Migrations\201905041752321_addeddatepicker.Designer.cs">
       <DependentUpon>201905041752321_addeddatepicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905042253387_addeddatepickertootherproperties.cs" />
+    <Compile Include="Migrations\201905042253387_addeddatepickertootherproperties.Designer.cs">
+      <DependentUpon>201905042253387_addeddatepickertootherproperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905042348151_addeddatepickerformattootherproperties.cs" />
+    <Compile Include="Migrations\201905042348151_addeddatepickerformattootherproperties.Designer.cs">
+      <DependentUpon>201905042348151_addeddatepickerformattootherproperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905042352463_addeddatepickerformattootherproperties1.cs" />
+    <Compile Include="Migrations\201905042352463_addeddatepickerformattootherproperties1.Designer.cs">
+      <DependentUpon>201905042352463_addeddatepickerformattootherproperties1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -424,6 +436,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905041752321_addeddatepicker.resx">
       <DependentUpon>201905041752321_addeddatepicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905042253387_addeddatepickertootherproperties.resx">
+      <DependentUpon>201905042253387_addeddatepickertootherproperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905042348151_addeddatepickerformattootherproperties.resx">
+      <DependentUpon>201905042348151_addeddatepickerformattootherproperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905042352463_addeddatepickerformattootherproperties1.resx">
+      <DependentUpon>201905042352463_addeddatepickerformattootherproperties1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
