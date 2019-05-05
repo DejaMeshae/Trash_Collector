@@ -3,16 +3,16 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class removedaddedOneTimePickUpproperty : DbMigration
+    public partial class AddedOneTimePickUpproperty : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.Customers", "OneTimePickUpDate");
+            AlterColumn("dbo.Customers", "OneTimePickUpDate", c => c.DateTime(nullable: true));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Customers", "OneTimePickUpDate", c => c.DateTime(nullable: true));
+            DropColumn("dbo.Customers", "OneTimePickUpDate");
         }
     }
 }

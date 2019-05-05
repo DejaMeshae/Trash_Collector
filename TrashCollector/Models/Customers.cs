@@ -49,8 +49,8 @@ namespace TrashCollector.Models
         [Display(Name = "Temporarily Stop Services End date")]
         public DateTime TempSuspendEnd { get; set; }
 
-        //[Display(Name = "One Time Pick-Up Request Date")]
-        //public DateTime OneTimePickUpDate { get; set; } 
+        [Display(Name = "One Time Pick-Up Request Date")]
+        public DateTime OneTimePickUpDate { get; set; }
 
         [Display(Name = "Payment Due: $80")]
         public string BillAmount { get; set; }
