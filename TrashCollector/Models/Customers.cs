@@ -13,46 +13,46 @@ namespace TrashCollector.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "First Name:")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last Name:")]
         public string LastName { get; set; }
 
-        [Display(Name = "Email Address")]
+        [Display(Name = "Email Address:")]
         public string Email { get; set; }
 
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "City")]
+        [Display(Name = "City:")]
         public string City { get; set; }
 
-        [Display(Name = "State")]
+        [Display(Name = "State:")]
         public string State { get; set; }
 
-        [Display(Name = "Zip Code")]
+        [Display(Name = "Zip Code:")]
         public int ZipCode { get; set; }
 
-        [Display(Name = "Start Pick-Up Services Date")]
+        [Display(Name = "Start Pick-Up Services:")]
         public DateTime StartPickUp { get; set; }
 
-        [Display(Name = "Day Of The Week For Pick Up")]
+        [Display(Name = "Day Of The Week For Pick Up:")]
         public string PickUpdate { get; set; }
 
-        [Display(Name = "End Pick-Up Services Date")]
+        [Display(Name = "End Pick-Up Services:")]
         public DateTime StopPickUp { get; set; }
 
-        [Display(Name = "Temporarily Stop Services Start Date")]
+        [Display(Name = "Temporarily Stop Services Start:")]
         public DateTime TempSuspendStart { get; set; }
 
-        [Display(Name = "Temporarily Stop Services End date")]
+        [Display(Name = "Temporarily Stop Services End:")]
         public DateTime TempSuspendEnd { get; set; }
 
-        [Display(Name = "One Time Pick-Up Request Date")]
+        [Display(Name = "One Time Pick-Up Request Date:")]
         public DateTime OneTimePickUpDate { get; set; }
 
-        [Display(Name = "Payment Due: $80")]
+        [Display(Name = "Payment Due:")]
         public string BillAmount { get; set; }
 
         [ForeignKey("ApplicationUser")]

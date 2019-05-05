@@ -34,6 +34,7 @@ namespace TrashCollector.Controllers
             {
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
                 Customers customer = db.customers.Find(id);
+                customer.BillAmount = "$80";
                 return View(customer); 
             }
         }
