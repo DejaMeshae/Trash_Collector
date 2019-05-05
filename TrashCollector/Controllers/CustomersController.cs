@@ -97,6 +97,7 @@ namespace TrashCollector.Controllers
             customerToEdit.PickUpdate = customers.PickUpdate;
             customerToEdit.TempSuspendStart = customers.TempSuspendStart;
             customerToEdit.TempSuspendEnd = customers.TempSuspendEnd;
+            //customerToEdit.OneTimePickUpDate = customers.OneTimePickUpDate;
             customers.ApplicationUserID = User.Identity.GetUserId();
             //db.Entry(customers).State = EntityState.Modified;
             db.SaveChanges();

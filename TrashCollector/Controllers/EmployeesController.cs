@@ -19,8 +19,8 @@ namespace TrashCollector.Controllers
         {
             string CurrentUserId = User.Identity.GetUserId();
             //var customersSameZip = db.employees.Include(e => e.FK.ToList(); FK for foriegn key once i figure that out
-            var CustomersSameZip = db.employees.Include(e => e.Customers).ToList(); //FK for foriegn key once i figure that out
-            return View(CustomersSameZip);                                                                      //
+            var CustomersSameZip = db.employees.Include(e => e.Customers).ToList();
+            return View(CustomersSameZip);                                                                      
             //return View(db.customers.ToList());
         }
 

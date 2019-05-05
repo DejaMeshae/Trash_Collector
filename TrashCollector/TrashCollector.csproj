@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201905042352463_addeddatepickerformattootherproperties1.Designer.cs">
       <DependentUpon>201905042352463_addeddatepickerformattootherproperties1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905050508154_removedaddedOneTimePickUpproperty.cs" />
+    <Compile Include="Migrations\201905050508154_removedaddedOneTimePickUpproperty.Designer.cs">
+      <DependentUpon>201905050508154_removedaddedOneTimePickUpproperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -445,6 +449,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905042352463_addeddatepickerformattootherproperties1.resx">
       <DependentUpon>201905042352463_addeddatepickerformattootherproperties1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905050508154_removedaddedOneTimePickUpproperty.resx">
+      <DependentUpon>201905050508154_removedaddedOneTimePickUpproperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
