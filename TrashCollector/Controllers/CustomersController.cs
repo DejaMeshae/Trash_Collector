@@ -94,14 +94,15 @@ namespace TrashCollector.Controllers
             customerToEdit.ZipCode = customers.ZipCode;
             customerToEdit.StopPickUp = customers.StopPickUp;
             customerToEdit.StartPickUp = customers.StartPickUp;
-            customerToEdit.PickUpdate = customers.PickUpdate;
+            customerToEdit.PickUpdate = customers.PickUpdate; 
             customerToEdit.TempSuspendStart = customers.TempSuspendStart;
             customerToEdit.TempSuspendEnd = customers.TempSuspendEnd;
             customerToEdit.OneTimePickUpDate = customers.OneTimePickUpDate;
             customers.ApplicationUserID = User.Identity.GetUserId();
-            //db.Entry(customers).State = EntityState.Modified;
-            db.SaveChanges();
+                //db.Entry(customers).State = EntityState.Modified;
+                db.SaveChanges();
             
+
             return RedirectToAction("Details", new { id = customers.Id });
         }
 
