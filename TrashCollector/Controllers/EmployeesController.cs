@@ -30,26 +30,17 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                Employees employees = null;
                 //redirect to create so the employee can create their account
-                string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+                //string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
                 //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
-                return View(employees); 
+                return View("Create"); 
             }
-            //var displayThatCustomerInfo = db.customers.Where(c => c.Id == id); dont think i need
-            //Customers customers = db.customers.Find(id);
-            //if (customers == null)
-            //{
-            //    //redirect to create so the customer can create sign up to recieve trash pick up
-            //    return HttpNotFound();
-            //}
-            //else
-            //{
-
-            return View(); //show the customers info then they can click to edit
-
-            //}
-            //return View(displayThatCustomerInfo); dont think i need
+            else
+            {
+                string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+                Employees employee = db.employees.Find(id);
+                return View(employee); //show the customers info then they can click to edit
+            }
         }
 
         // GET: Employees/Create
