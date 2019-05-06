@@ -17,11 +17,11 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            string CurrentUserId = User.Identity.GetUserId();
-            var employee = db.employees.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
-            List <Customers> sameZip = db.customers.Where(c => c.ZipCode == employee.ZipCode).ToList(); 
-            //var CustomersSameZip = db.employees.Include(e => e.Customers).ToList();
-            return View(sameZip);                                                                      
+            var listOfCustomers = db.customers.ToList();
+            //var SameZip = db.employees.Where(e => e.ZipCode == ApplicationUserId.FirstOrDefault();
+            //List <Customers> sameZip = db.customers.Where(c => c.ZipCode == employee.ZipCode).ToList(); //don't think i need
+            //var Customers = db.employees.Include(e => e.Customers).ToList();
+            return View(listOfCustomers);                                                                      
             //return View(db.customers.ToList());
         }
 
