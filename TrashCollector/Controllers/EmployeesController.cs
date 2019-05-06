@@ -75,7 +75,8 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //if its returning me here then the id is null
+                return View("Create");
             }
             Employees employees = db.employees.Find(id);
             if(employees == null)
@@ -98,13 +99,11 @@ namespace TrashCollector.Controllers
             employeeToEdit.FirstName = employees.FirstName;
             employeeToEdit.LastName = employees.LastName;
             employeeToEdit.ZipCode = employees.ZipCode;
-            if (ModelState.IsValid)
-            {
-                db.Entry(employees).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(employees);
+            employees.ApplicationUserID = User.Identity.GetUserId();
+            //db.Entry(employees).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = employees.Id }); 
         }
 
         // GET: Employees/Delete/5

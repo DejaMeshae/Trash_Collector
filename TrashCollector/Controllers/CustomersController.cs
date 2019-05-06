@@ -107,8 +107,6 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Details", new { id = customers.Id });
         }
 
-
-
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
