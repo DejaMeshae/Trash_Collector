@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,10 @@ namespace TrashCollector.Models
         public int ZipCode { get; set; }
 
         public IEnumerable<Customers> Customers { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserID { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
     }
 }

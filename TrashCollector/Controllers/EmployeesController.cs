@@ -18,9 +18,10 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             string CurrentUserId = User.Identity.GetUserId();
-            //var customersSameZip = db.employees.Include(e => e.FK.ToList(); FK for foriegn key once i figure that out
-            var CustomersSameZip = db.employees.Include(e => e.Customers).ToList();
-            return View(CustomersSameZip);                                                                      
+            var employee = db.employees.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
+            List <Customers> sameZip = db.customers.Where(c => c.ZipCode == employee.ZipCode).ToList(); 
+            //var CustomersSameZip = db.employees.Include(e => e.Customers).ToList();
+            return View(sameZip);                                                                      
             //return View(db.customers.ToList());
         }
 
@@ -54,9 +55,9 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            //Create their account info address, start date
-            Customers customer = new Customers();
-            return View(customer);
+            //Create their account info zip
+            Employees employee = new Employees();
+            return View(employee);
         }
 
         // POST: Customers/Create
@@ -64,19 +65,18 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,ZipCode")] Employees employees)
         {
             if (ModelState.IsValid)
             {
                 // assign customer FK to aspnetuser!
-                customers.ApplicationUserID = User.Identity.GetUserId();
-                customers.Password = "password"; //might not need this line
-                db.customers.Add(customers);
+                employees.ApplicationUserID = User.Identity.GetUserId();
+                db.employees.Add(employees);
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = customers.Id });
+                return RedirectToAction("Details", new { id = employees.Id });
             }
 
-            return View(customers);
+            return View(employees);
         }
 
         // GET: Customers/Edit/5

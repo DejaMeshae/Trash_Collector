@@ -272,6 +272,10 @@
     <Compile Include="Migrations\201905051626266_AddedOneTimePickUppropertyAsNullableTrue.Designer.cs">
       <DependentUpon>201905051626266_AddedOneTimePickUppropertyAsNullableTrue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905060335360_AddedForeignKeyApplicationUserToEmployeeModel.cs" />
+    <Compile Include="Migrations\201905060335360_AddedForeignKeyApplicationUserToEmployeeModel.Designer.cs">
+      <DependentUpon>201905060335360_AddedForeignKeyApplicationUserToEmployeeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
@@ -389,6 +393,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -466,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905051626266_AddedOneTimePickUppropertyAsNullableTrue.resx">
       <DependentUpon>201905051626266_AddedOneTimePickUppropertyAsNullableTrue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905060335360_AddedForeignKeyApplicationUserToEmployeeModel.resx">
+      <DependentUpon>201905060335360_AddedForeignKeyApplicationUserToEmployeeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
