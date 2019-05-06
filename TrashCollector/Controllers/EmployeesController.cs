@@ -14,7 +14,7 @@ namespace TrashCollector.Controllers
     {
                 private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Customers
+        // GET: Employees
         public ActionResult Index()
         {
             string CurrentUserId = User.Identity.GetUserId();
@@ -25,16 +25,16 @@ namespace TrashCollector.Controllers
             //return View(db.customers.ToList());
         }
 
-        // GET: Customers/Details/5
+        // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                Customers customers = null;
-                //redirect to create so the customer can create sign up to recieve trash pick up
+                Employees employees = null;
+                //redirect to create so the employee can create their account
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
                 //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
-                return View(customers); //show the customers info then they can click to edit
+                return View(employees); 
             }
             //var displayThatCustomerInfo = db.customers.Where(c => c.Id == id); dont think i need
             //Customers customers = db.customers.Find(id);
@@ -52,7 +52,7 @@ namespace TrashCollector.Controllers
             //return View(displayThatCustomerInfo); dont think i need
         }
 
-        // GET: Customers/Create
+        // GET: Employees/Create
         public ActionResult Create()
         {
             //Create their account info zip
@@ -60,7 +60,7 @@ namespace TrashCollector.Controllers
             return View(employee);
         }
 
-        // POST: Customers/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -69,7 +69,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                // assign customer FK to aspnetuser!
+                // assign employees FK to aspnetuser!
                 employees.ApplicationUserID = User.Identity.GetUserId();
                 db.employees.Add(employees);
                 db.SaveChanges();
@@ -79,67 +79,68 @@ namespace TrashCollector.Controllers
             return View(employees);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customers customers = db.customers.Find(id);
-            if (customers == null)
+            Employees employees = db.employees.Find(id);
+            if(employees == null)
             {
                 return HttpNotFound();
             }
-            return View(customers);
+            return View(employees);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,City,State,ZipCode,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,ZipCode")] Employees employees)
         {
-            //find customer to edit and edit pick up date
-            var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
+            //find employee to edit 
+            var employeeToEdit = db.employees.Where(e => e.Id == employees.Id).FirstOrDefault();
 
-            customerToEdit.PickUpdate = customers.PickUpdate;
+            employeeToEdit.FirstName = employees.FirstName;
+            employeeToEdit.LastName = employees.LastName;
+            employeeToEdit.ZipCode = employees.ZipCode;
             if (ModelState.IsValid)
             {
-                db.Entry(customers).State = EntityState.Modified;
+                db.Entry(employees).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customers);
+            return View(employees);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customers customers = db.customers.Find(id);
-            if (customers == null)
+            Employees employees = db.employees.Find(id);
+            if (employees == null)
             {
                 return HttpNotFound();
             }
-            return View(customers);
+            return View(employees);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customers customers = db.customers.Find(id);
-            db.customers.Remove(customers);
+            Employees employees = db.employees.Find(id);
+            db.employees.Remove(employees);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        //hi
         protected override void Dispose(bool disposing)
         {
             if (disposing)
