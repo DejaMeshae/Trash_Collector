@@ -17,12 +17,20 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var listOfCustomers = db.customers.ToList();
-            //var SameZip = db.employees.Where(e => e.ZipCode == ApplicationUserId.FirstOrDefault();
-            //List <Customers> sameZip = db.customers.Where(c => c.ZipCode == employee.ZipCode).ToList(); //don't think i need
-            //var Customers = db.employees.Include(e => e.Customers).ToList();
-            return View(listOfCustomers);                                                                      
-            //return View(db.customers.ToList());
+            return RedirectToAction("DayOfCustomerPickUp");
+            //nativgate to the method above
+        }
+
+        public ActionResult DayOfCustomerPickUp(Customers customers)
+        {
+            string CurrentUserId = User.Identity.GetUserId(); //user ID thats logged in now
+            var CurrentEmployee = db.employees.Where(e => e.ApplicationUserID == CurrentUserId).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
+            List<Customers> CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList();
+            //var CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList(); // compare the current employee thats logged in zip to the zips in the customer database and put it in a list
+
+            string DayOfTheWeek = DateTime.Now.DayOfWeek.ToString(); //Time now look up this day of the week 
+            var PickUpDay = db.customers.Where(c => c.PickUpdate == DayOfTheWeek).ToList(); //
+            return View("DayOfCustomerPickUp");
         }
 
         // GET: Employees/Details/5
@@ -64,7 +72,7 @@ namespace TrashCollector.Controllers
                 employees.ApplicationUserID = User.Identity.GetUserId();
                 db.employees.Add(employees);
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = employees.Id });
+                return RedirectToAction("DayOfCustomerPickUp");
             }
 
             return View(employees);
