@@ -55,6 +55,9 @@ namespace TrashCollector.Models
         [Display(Name = "Payment Due:")]
         public string BillAmount { get; set; }
 
+        [Display(Name = "Picked Up")]
+        public bool PickedUp { get; set; }
+
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }

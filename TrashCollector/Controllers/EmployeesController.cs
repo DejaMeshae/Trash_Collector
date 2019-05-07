@@ -21,7 +21,7 @@ namespace TrashCollector.Controllers
             //nativgate to the method above
         }
 
-        public ActionResult DayOfCustomerPickUp(Customers customers)
+        public ActionResult DayOfCustomerPickUp()
         {
             string CurrentUserId = User.Identity.GetUserId(); //user ID thats logged in now
             var CurrentEmployee = db.employees.Where(e => e.ApplicationUserID == CurrentUserId).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
@@ -29,7 +29,16 @@ namespace TrashCollector.Controllers
             //var CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList(); // compare the current employee thats logged in zip to the zips in the customer database and put it in a list
 
             string DayOfTheWeek = DateTime.Now.DayOfWeek.ToString(); //Time now look up this day of the week 
-            var PickUpDay = db.customers.Where(c => c.PickUpdate == DayOfTheWeek).ToList(); //
+            var PickUpDay = db.customers.Where(c => c.PickUpdate == DayOfTheWeek).ToList(); //comparing todays date to customers with todays pick up date
+            return View("DayOfCustomerPickUp");
+        }
+
+        public ActionResult TrashPickedUp(int id)
+        {
+            var Customer = db.customers.Where(c => c.Id == id).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
+            Customer.PickedUp = true; //picked up trash
+            Customer.BillAmount += 15; //add to bill
+            db.SaveChanges();
             return View("DayOfCustomerPickUp");
         }
 
