@@ -87,7 +87,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Password,City,State,ZipCode,StartPickUp,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd,OneTimePickUpDate")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,Password,City,State,ZipCode,StartPickUp,PickUpDate,StopPickUp,TempSuspendStart,TempSuspendEnd,OneTimePickUpDate")] Customers customers)
         {
             //find customer to edit and edit pick up date
             var customerToEdit = db.customers.Where(c => c.Id == customers.Id).FirstOrDefault();
