@@ -25,21 +25,21 @@ namespace TrashCollector.Controllers
         {
             string CurrentUserId = User.Identity.GetUserId(); //user ID thats logged in now
             var CurrentEmployee = db.employees.Where(e => e.ApplicationUserID == CurrentUserId).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
-            List<Customers> CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList();
+            List<Customers> CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList(); //&& PickedUp == false?
             //var CustomersZip = db.customers.Where(c => c.ZipCode == CurrentEmployee.ZipCode).ToList(); // compare the current employee thats logged in zip to the zips in the customer database and put it in a list
 
-            string DayOfTheWeek = DateTime.Now.DayOfWeek.ToString(); //Time now look up this day of the week 
-            var PickUpDay = db.customers.Where(c => c.PickUpdate == DayOfTheWeek).ToList(); //comparing todays date to customers with todays pick up date
-            return View("DayOfCustomerPickUp");
+            string DayOfTheWeek = DateTime.Now.DayOfWeek.ToString().ToLower();//Time now look up this day of the week 
+            var customersByZipAndDay = CustomersZip.Where(c => c.PickUpdate == DayOfTheWeek).ToList(); //comparing todays date to customers with todays pick up date
+            return View("DayOfCustomerPickUp", customersByZipAndDay); //passes action to the view also zip and day filterd customers
         }
 
         public ActionResult TrashPickedUp(int id)
         {
             var Customer = db.customers.Where(c => c.Id == id).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
-            Customer.PickedUp = true; //picked up trash
+            var trashedPickedUp = Customer.PickedUp = true; //picked up trash
             Customer.BillAmount += 15; //add to bill
             db.SaveChanges();
-            return View("DayOfCustomerPickUp");
+            return RedirectToAction("DayOfCustomerPickUp", trashedPickedUp);
         }
 
         // GET: Employees/Details/5
@@ -47,16 +47,13 @@ namespace TrashCollector.Controllers
         {
             if (id == null)
             {
-                //redirect to create so the employee can create their account
-                //string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
-                //customers = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault();
                 return View("Create"); 
             }
             else
             {
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
-                Employees employee = db.employees.Find(id);
-                return View(employee); //show the customers info then they can click to edit
+                Customers customer = db.customers.Find();
+                return View(customer); //show the customers info then they can click to see details
             }
         }
 
@@ -69,8 +66,6 @@ namespace TrashCollector.Controllers
         }
 
         // POST: Employees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,ZipCode")] Employees employees)
@@ -104,8 +99,6 @@ namespace TrashCollector.Controllers
         }
 
         // POST: Employees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,ZipCode")] Employees employees)
