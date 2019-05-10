@@ -35,9 +35,9 @@ namespace TrashCollector.Controllers
 
         public ActionResult TrashPickedUp(int id)
         {
-            var Customer = db.customers.Where(c => c.Id == id).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
-            var trashedPickedUp = Customer.PickedUp = true; //picked up trash
-            Customer.BillAmount += 15; //add to bill
+            var CustomerPickedUp = db.customers.Where(c => c.Id == id).FirstOrDefault(); //comparing the user thats signed in ID to the ID in the database 
+            var trashedPickedUp = CustomerPickedUp.PickedUp = true; //picked up trash
+            CustomerPickedUp.BillAmount += 15; //add to bill
             db.SaveChanges();
             return RedirectToAction("DayOfCustomerPickUp", trashedPickedUp);
         }
@@ -52,7 +52,7 @@ namespace TrashCollector.Controllers
             else
             {
                 string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
-                Customers customer = db.customers.Find();
+                Customers customer = db.customers.Find(id);
                 return View(customer); //show the customers info then they can click to see details
             }
         }

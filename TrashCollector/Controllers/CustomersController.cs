@@ -18,9 +18,16 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
-            Customers CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault(); //make sure its them
-            return RedirectToAction("Details", new { id = CurrentCustomerInfo.Id }); //display it in details pass in that person
+            if (ModelState.IsValid)
+            {
+                string CurrentUserId = User.Identity.GetUserId(); //user thats logged in now
+                Customers CurrentCustomerInfo = db.customers.Where(c => c.ApplicationUserID == CurrentUserId).FirstOrDefault(); //make sure its them
+                return RedirectToAction("Details", new { id = CurrentCustomerInfo.Id }); //display it in details pass in that person
+            }
+            else
+            {
+                return View("Create"); //let the user create their account so they can view their account
+            }
         }
 
         // GET: Customers/Details/5

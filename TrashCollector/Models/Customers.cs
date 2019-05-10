@@ -39,11 +39,14 @@ namespace TrashCollector.Models
 
         [Display(Name = "Day Of The Week For Pick Up:")]
         public string PickUpdate { get; set; }
+        //public DayOfWeek PickUpdate { get; set; }
 
         [Display(Name = "End Pick-Up Services:")]
         public DateTime StopPickUp { get; set; }
 
         [Display(Name = "Temporarily Stop Services Start:")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "(0:yyyy-MM-dd)", ApplyFormatInEditMode = true)]
         public DateTime TempSuspendStart { get; set; }
 
         [Display(Name = "Temporarily Stop Services End:")]
@@ -61,6 +64,10 @@ namespace TrashCollector.Models
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        //[ForeignKey("MovieFK")]
+        //public string MovieForeignKeyID { get; set; }
+        //public virtual MovieForeignKeyID MovieForeignKeyID { get; set; }
 
     }
 }
