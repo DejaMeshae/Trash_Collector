@@ -39,7 +39,7 @@ namespace TrashCollector.Controllers
             var trashedPickedUp = CustomerPickedUp.PickedUp = true; //picked up trash
             CustomerPickedUp.BillAmount += 15; //add to bill
             db.SaveChanges();
-            return RedirectToAction("DayOfCustomerPickUp", trashedPickedUp);
+            return RedirectToAction("DayOfCustomerPickUp");
         }
 
         // GET: Employees/Details/5
